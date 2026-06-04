@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background:#f4f7f6;
+    }
+
+    .login-container{
+
+        min-height:85vh;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        background:
+        linear-gradient(
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.45)
+        ),
+        url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854");
+
+        background-size:cover;
+        background-position:center;
+
+        border-radius:20px;
+
+        animation:fadeIn 1s ease;
+    }
+
+    .login-card{
+
+        width:100%;
+        max-width:450px;
+
+        backdrop-filter:blur(15px);
+        background:rgba(255,255,255,0.15);
+
+        border:1px solid rgba(255,255,255,0.2);
+
+        border-radius:20px;
+
+        padding:40px;
+
+        color:white;
+
+        box-shadow:
+        0 8px 32px rgba(0,0,0,0.3);
+
+        animation:slideUp 1s ease;
+    }
+
+    .login-title{
+
+        text-align:center;
+
+        margin-bottom:30px;
+
+        font-size:32px;
+        font-weight:bold;
+    }
+
+    .login-subtitle{
+
+        text-align:center;
+
+        margin-bottom:30px;
+
+        color:#f1f1f1;
+    }
+
+    form p{
+
+        margin-bottom:20px;
+    }
+
+    form label{
+
+        display:block;
+
+        margin-bottom:8px;
+
+        font-weight:600;
+    }
+
+    form input{
+
+        width:100%;
+
+        padding:12px;
+
+        border:none;
+
+        border-radius:10px;
+
+        outline:none;
+
+        background:rgba(255,255,255,0.85);
+
+        transition:0.3s;
+    }
+
+    form input:focus{
+
+        transform:scale(1.02);
+
+        box-shadow:
+        0 0 10px rgba(255,255,255,0.8);
+    }
+
+    .login-btn{
+
+        width:100%;
+
+        padding:12px;
+
+        border:none;
+
+        border-radius:10px;
+
+        background:#28a745;
+
+        color:white;
+
+        font-size:18px;
+
+        font-weight:bold;
+
+        transition:0.3s;
+    }
+
+    .login-btn:hover{
+
+        background:#1f8a37;
+
+        transform:translateY(-3px);
+
+        box-shadow:
+        0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .register-link{
+
+        text-align:center;
+
+        margin-top:20px;
+    }
+
+    .register-link a{
+
+        color:#ffd43b;
+
+        text-decoration:none;
+
+        font-weight:bold;
+    }
+
+    .register-link a:hover{
+
+        text-decoration:underline;
+    }
+
+    .icon{
+
+        font-size:55px;
+
+        text-align:center;
+
+        margin-bottom:15px;
+
+        animation:float 3s infinite ease-in-out;
+    }
+
+    @keyframes fadeIn{
+
+        from{
+            opacity:0;
+        }
+
+        to{
+            opacity:1;
+        }
+    }
+
+    @keyframes slideUp{
+
+        from{
+            opacity:0;
+            transform:translateY(50px);
+        }
+
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    @keyframes float{
+
+        0%{
+            transform:translateY(0);
+        }
+
+        50%{
+            transform:translateY(-10px);
+        }
+
+        100%{
+            transform:translateY(0);
+        }
+    }
+
+</style>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="icon">
+            🌱
+        </div>
+
+        <h2 class="login-title">
+            FarmConnect
+        </h2>
+
+        <p class="login-subtitle">
+            Welcome Back! Login to continue.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                Login
+            </button>
+
+        </form>
+
+        <div class="register-link">
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+                Register Here
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

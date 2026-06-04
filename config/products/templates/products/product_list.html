@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row mb-4">
+
+        <div class="col-md-6">
+            <h2 class="fw-bold">
+                Fresh Farm Products
+            </h2>
+        </div>
+
+        <div class="col-md-6">
+
+            <form method="GET">
+
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Search products..."
+                    value="{{ request.GET.search }}">
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        {% for product in products %}
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                {% if product.image %}
+                <img
+                    src="{{ product.image.url }}"
+                    class="card-img-top"
+                    style="height:250px; object-fit:cover;">
+                {% else %}
+                <img
+                    src="https://via.placeholder.com/400x250"
+                    class="card-img-top">
+                {% endif %}
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title">
+                        {{ product.name }}
+                    </h5>
+
+                    <p class="text-muted mb-1">
+                        Category:
+                        {{ product.category }}
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>
+                            ₹{{ product.price }}
+                        </strong>
+                    </p>
+
+                    <p class="mb-1">
+                        Available:
+                        {{ product.quantity }}
+                    </p>
+
+                    <p class="text-muted">
+                        Farmer:
+                        {{ product.farmer.username }}
+                    </p>
+
+                    <p class="card-text">
+                        {{ product.description|truncatewords:15 }}
+                    </p>
+
+                    <div class="mt-auto">
+
+                        <a
+                            href="#"
+                            class="btn btn-success w-100">
+
+                            Add To Cart
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="alert alert-warning text-center">
+
+                No Products Available
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
