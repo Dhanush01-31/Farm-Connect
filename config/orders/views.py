@@ -5,7 +5,7 @@ from products.models import Product
 from .models import Cart
 
 # ADD To CART function
-@login_required
+@login_required(login_url='login')
 def add_to_cart(request, product_id):
 
     product = get_object_or_404(
@@ -35,7 +35,7 @@ def add_to_cart(request, product_id):
     return redirect('cart')
 
 # Cart view
-@login_required
+@login_required(login_url='login')
 def cart(request):
 
     cart_items = Cart.objects.filter(
