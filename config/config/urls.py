@@ -30,6 +30,7 @@ urlpatterns = [
         include('accounts.urls')
     ),
     path('', include('products.urls')),
+    path('', include('orders.urls')),
 ]
 
 if settings.DEBUG:
