@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow text-center">
+
+        <div class="card-body p-5">
+
+            <h1 class="text-success">
+
+                🎉 Order Placed Successfully
+
+            </h1>
+
+            <p class="mt-3">
+
+                Thank you for shopping with FarmConnect.
+
+            </p>
+
+            <a
+                href="{% url 'products' %}"
+                class="btn btn-success">
+
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

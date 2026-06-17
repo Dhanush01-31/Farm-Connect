@@ -4,58 +4,155 @@
 
 <div class="container mt-5">
 
-    <h2 class="mb-4">
-        My Cart
-    </h2>
+    <div class="card shadow">
 
-    <table class="table table-bordered">
+        <div class="card-header bg-success text-white">
 
-        <thead>
+            <h3 class="mb-0">
+                My Cart
+            </h3>
 
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
+        </div>
 
-        </thead>
+        <div class="card-body">
 
-        <tbody>
+            {% if cart_items %}
 
-            {% for item in cart_items %}
+            <div class="table-responsive">
 
-            <tr>
+                <table class="table table-bordered align-middle text-center">
 
-                <td>
-                    {{ item.product.name }}
-                </td>
+                    <thead class="table-success">
 
-                <td>
-                    ₹{{ item.product.price }}
-                </td>
+                        <tr>
 
-                <td>
-                    {{ item.quantity }}
-                </td>
+                            <th>Product</th>
 
-                <td>
-                    ₹{% widthratio item.product.price 1 item.quantity %}
-                </td>
+                            <th>Price</th>
 
-            </tr>
+                            <th>Quantity</th>
 
-            {% endfor %}
+                            <th>Subtotal</th>
 
-        </tbody>
+                            <th>Action</th>
 
-    </table>
+                        </tr>
 
-    <div class="text-end">
+                    </thead>
 
-        <h3>
-            Total: ₹{{ total }}
-        </h3>
+                    <tbody>
+
+                        {% for item in cart_items %}
+
+                        <tr>
+
+                            <td>
+                                {{ item.product.name }}
+                            </td>
+
+                            <td>
+                                ₹{{ item.product.price }}
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{% url 'decrease_quantity' item.id %}"
+                                    class="btn btn-danger btn-sm">
+
+                                    -
+
+                                </a>
+
+                                <span class="mx-3 fw-bold">
+
+                                    {{ item.quantity }}
+
+                                </span>
+
+                                <a
+                                    href="{% url 'increase_quantity' item.id %}"
+                                    class="btn btn-success btn-sm">
+
+                                    +
+
+                                </a>
+
+                            </td>
+
+                            <td>
+
+                                ₹{% widthratio item.product.price 1 item.quantity %}
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{% url 'remove_from_cart' item.id %}"
+                                    class="btn btn-danger btn-sm">
+
+                                    Remove
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="text-end mt-4">
+
+                <h3>
+
+                    Total:
+                    <span class="text-success">
+                        ₹{{ total }}
+                    </span>
+
+                </h3>
+
+            </div>
+
+            <div class="text-end mt-3">
+
+              <a
+    href="{% url 'checkout' %}"
+    class="btn btn-success btn-lg">
+
+    Proceed To Checkout
+
+</a>
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-warning text-center">
+
+                <h4>
+                    Your Cart Is Empty
+                </h4>
+
+                <a
+                    href="{% url 'products' %}"
+                    class="btn btn-success mt-2">
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
 
     </div>
 

@@ -25,3 +25,61 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.customer.username} - {self.product.name}"
+    
+
+
+# order model
+class Order(models.Model):
+
+    STATUS_CHOICES = [
+        ('Placed', 'Placed'),
+        ('Packed', 'Packed'),
+        ('Shipped', 'Shipped'),
+        ('Delivered', 'Delivered'),
+    ]
+
+    customer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    full_name = models.CharField(max_length=100)
+
+    phone = models.CharField(max_length=15)
+
+    address = models.TextField()
+
+    total_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='Placed'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+# order item model
+class OrderItem(models.Model):
+
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+
+    quantity = models.PositiveIntegerField()
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
