@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h3>
+                Order #{{ order.id }}
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <h5>
+
+                Status:
+                <span class="badge bg-primary">
+                    {{ order.status }}
+                </span>
+
+            </h5>
+
+            <hr>
+
+            <h5>
+                Ordered Products
+            </h5>
+
+            <table class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for item in order_items %}
+
+                    <tr>
+
+                        <td>
+                            {{ item.product.name }}
+                        </td>
+
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+
+                        <td>
+                            ₹{{ item.price }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            <div class="mt-4">
+
+                <h5>
+                    Delivery Address
+                </h5>
+
+                <p>
+                    {{ order.address }}
+                </p>
+
+            </div>
+
+            <div class="mt-3">
+
+                <h5>
+                    Total Amount:
+                    ₹{{ order.total_amount }}
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
